@@ -1,21 +1,18 @@
 //Home.jsx
 
 import React from 'react';
-import '../Style/main.css';  // Import du CSS global
-import Header from '../layout/header/header';
-import Footer from '../layout/footer/footer';
+import '@/Style/main.css';  // Import du CSS global
+
 
 // Import des images depuis le dossier assets
-import iconChat from '../assets/icon-chat.png';
-import iconMoney from '../assets/icon-money.png';
-import iconSecurity from '../assets/icon-security.png';
+import iconChat from '@/assets/icon-chat.png';
+import iconMoney from '@/assets/icon-money.png';
+import iconSecurity from '@/assets/icon-security.png';
 
 const Home = () => {
   return (
     <div>
-      <Header isLoggedIn={false} /> {/* L'utilisateur n'est pas connecté */}
-
-      <main>
+    
         <div className="hero">
           <section className="hero-content">
             <h2 className="sr-only">Promoted Content</h2>
@@ -44,9 +41,7 @@ const Home = () => {
             <p>We use top of the line encryption to make sure your data and money is always safe.</p>
           </div>
         </section>
-      </main>
-
-      <Footer />
+  
     </div>
   );
 };

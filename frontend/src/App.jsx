@@ -7,9 +7,9 @@ import PublicRouter from './pages/public/publicRouter';
 const App = () => {
     return (
         <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<PublicRouter />} />
-        </Routes>
+            <Routes>
+                <Route path="/" element={<PublicRouter />} />
+            </Routes>
         </BrowserRouter>
     );
     };

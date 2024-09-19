@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../../components/Home';
-import Login from '../../components/Login';
-import Profil from '../../components/Profil';
-import Layout from '../../layout/layout';
+import Home from '@/pages/public/Home';
+import Login from '@/pages/public/Login';
+import Profil from '@/pages/public/Profil';
+import Layout from '@/pages/public/Layout';
 
 const PublicRouter = () => {
     return (
