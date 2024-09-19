@@ -2,16 +2,13 @@ import React from 'react';
 import '../Style/main.css';  // Import du CSS global
 
 // Import du logo
-import argentBankLogo from '../assets/argentBankLogo.png';
+import Header from '../layout/header/header';
+import Footer from '../layout/footer/footer';
 
 const Login = () => {
   return (
     <div>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img className="main-nav-logo-image" src={argentBankLogo} alt="Argent Bank Logo" />
-        </a>
-      </nav>
+      <Header isLoggedIn={false} /> {/* L'utilisateur n'est pas connecté */}
 
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -35,9 +32,7 @@ const Login = () => {
         </section>
       </main>
 
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

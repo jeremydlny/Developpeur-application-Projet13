@@ -2,9 +2,10 @@
 
 import React from 'react';
 import '../Style/main.css';  // Import du CSS global
+import Header from '../layout/header/header';
+import Footer from '../layout/footer/footer';
 
 // Import des images depuis le dossier assets
-import argentBankLogo from '../assets/argentBankLogo.png';
 import iconChat from '../assets/icon-chat.png';
 import iconMoney from '../assets/icon-money.png';
 import iconSecurity from '../assets/icon-security.png';
@@ -12,16 +13,7 @@ import iconSecurity from '../assets/icon-security.png';
 const Home = () => {
   return (
     <div>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img className="main-nav-logo-image" src={argentBankLogo} alt="Argent Bank Logo" />
-        </a>
-        <div>
-          <a className="main-nav-item" href="/login">
-            <i className="fa fa-user-circle"></i> Sign In
-          </a>
-        </div>
-      </nav>
+      <Header isLoggedIn={false} /> {/* L'utilisateur n'est pas connecté */}
 
       <main>
         <div className="hero">
@@ -54,9 +46,7 @@ const Home = () => {
         </section>
       </main>
 
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

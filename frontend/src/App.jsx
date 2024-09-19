@@ -1,19 +1,17 @@
+//App.jsx
+
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Profil from './components/Profil';
- 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profil />} />
-      </Routes>
-    </Router>
-  );
-}
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PublicRouter from './pages/public/publicRouter';
+
+const App = () => {
+    return (
+        <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<PublicRouter />} />
+        </Routes>
+        </BrowserRouter>
+    );
+    };
 
 export default App;

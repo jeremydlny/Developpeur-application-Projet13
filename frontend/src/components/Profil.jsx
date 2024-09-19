@@ -1,25 +1,11 @@
 import React from 'react';
 import '../Style/main.css';
-
-// Import des images depuis le dossier assets
-import argentBankLogo from '../assets/argentBankLogo.png';
+import Header from '../layout/header/header';
 
 const Profile = () => {
   return (
     <div>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img className="main-nav-logo-image" src={argentBankLogo} alt="Argent Bank Logo" />
-        </a>
-        <div>
-          <a className="main-nav-item" href="/profile">
-            <i className="fa fa-user-circle"></i> Tony
-          </a>
-          <a className="main-nav-item" href="/">
-            <i className="fa fa-sign-out"></i> Sign Out
-          </a>
-        </div>
-      </nav>
+      <Header isLoggedIn={true} userName={profileData.firstName} /> {/* L'utilisateur est connecté */}
 
       <main className="main bg-dark">
         <div className="header">
