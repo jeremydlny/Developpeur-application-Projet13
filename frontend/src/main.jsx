@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './_Features/Slices/store'; // Le store configuré
+import { store } from './_Redux/store'; // Le store configuré
 import App from './App';
 import './index.css';
 

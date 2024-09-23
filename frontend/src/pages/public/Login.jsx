@@ -1,8 +1,8 @@
 //Login.jsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSelector, setToken, setLoading, setError } from '@/_Features/Slices/authSlice';
+import { setToken, setLoading, setError } from '@/_Redux/Slices/authSlice';
 import { accountService } from '@/_service/accountService';
 import { useNavigate } from 'react-router-dom';
 import "@/Style/main.css";
@@ -12,28 +12,31 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector(loginSelector);  // Utilisation de loginSelector pour récupérer le token
-  const isLoading = useSelector((state) => state.auth.isLoading);
+
+  useEffect( () => {
+    verifyToken();
+  
+}, [navigate]);
+
+  const verifyToken = async () => {
+    const response = await accountService.isLogged();
+    console.log(response);
+    if (response) {
+      navigate('/profile');
+    }
+  };
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));  // Met à jour l'état de chargement
     try {
       const response = await accountService.loginUser({ email, password });
-      
-      // Ajoute ce console.log pour voir toute la réponse de l'API
-      console.log('Réponse API:', response);
 
-      // Vérifie si le token est dans response.data.token
-      console.log("Token JWT:", response.data.body.token);
-
-      dispatch(setToken(response.data.body.token));  // Sauvegarde le token correctement
+      accountService.saveToken(response.data.body.token);  // Enregistre le token dans le local storage
       navigate('/profile');  // Redirige vers la page profil après la connexion
     } catch (err) {
       dispatch(setError('Invalid credentials'));  // Gère l'erreur en cas d'échec
-    } finally {
-      dispatch(setLoading(false));  // Désactive l'état de chargement
-    }
+    } 
 };
   
 
@@ -59,5 +62,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;
