@@ -1,11 +1,9 @@
 import React from 'react';
-import '../Style/main.css';
-import Header from '../layout/header/header';
+import "@/Style/main.css"; 
 
 const Profile = () => {
   return (
     <div>
-      <Header isLoggedIn={true} userName={profileData.firstName} /> {/* L'utilisateur est connecté */}
 
       <main className="main bg-dark">
         <div className="header">

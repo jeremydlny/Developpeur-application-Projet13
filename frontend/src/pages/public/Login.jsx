@@ -1,14 +1,10 @@
 import React from 'react';
-import '../Style/main.css';  // Import du CSS global
+import "@/Style/main.css"; 
 
-// Import du logo
-import Header from '../layout/header/header';
-import Footer from '../layout/footer/footer';
 
 const Login = () => {
   return (
     <div>
-      <Header isLoggedIn={false} /> {/* L'utilisateur n'est pas connecté */}
 
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -32,7 +28,6 @@ const Login = () => {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 };

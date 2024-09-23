@@ -1,4 +1,4 @@
-import Axios from '@/callerService.js'
+import Axios from '@/_service/callerService.js'
 
 let loginUser = (data) => {
   return Axios.post('/api/v1/user/login', data)
@@ -14,7 +14,7 @@ let getToken = () => {
 }
 
 // fonction insertion du token dans le local storage
-let saveToken = (token) => {
+let saveToken = (token) => { 
   localStorage.setItem('token', token)
 }
 

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '@/pages/public/Home';
 import Login from '@/pages/public/Login';
 import Profil from '@/pages/public/Profil';
-import Layout from '@/pages/public/Layout';
+import Layout from '@/layout/layout';
 
 const PublicRouter = () => {
     return (

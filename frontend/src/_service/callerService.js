@@ -1,6 +1,6 @@
 /** Import des modules nécessaires */
 import axios from 'axios'
-import { accountService } from './accountService.js'
+import { accountService } from "@/_service/accountService";
 
 const Axios = axios.create({
     baseURL: 'http://localhost:3001',
