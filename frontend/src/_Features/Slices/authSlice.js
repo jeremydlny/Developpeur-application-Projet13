@@ -1,7 +1,5 @@
-// _Features/Slices/authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { accountService } from "@/_service/accountService";
-
 
 const initialState = {
     isError: null,
@@ -36,6 +34,9 @@ export const authSlice = createSlice({
         },
     },
 });
+
+// Création du loginSelector
+export const loginSelector = (state) => state.auth.token;
 
 export const { logout, setToken, setError, setLoading } = authSlice.actions;
 export default authSlice.reducer;
