@@ -22,7 +22,7 @@ const Login = () => {
     const response = await accountService.isLogged();
     console.log(response);
     if (response) {
-      navigate('/profile');
+      navigate('/profil');
     }
   };
 
@@ -33,7 +33,7 @@ const Login = () => {
       const response = await accountService.loginUser({ email, password });
 
       accountService.saveToken(response.data.body.token);  // Enregistre le token dans le local storage
-      navigate('/profile');  // Redirige vers la page profil après la connexion
+      navigate('/profil');  // Redirige vers la page profil après la connexion
     } catch (err) {
       dispatch(setError('Invalid credentials'));  // Gère l'erreur en cas d'échec
     } 
@@ -55,7 +55,7 @@ const Login = () => {
               <label htmlFor="password">Password</label>
               <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button className="sign-in-button" type="submit" disabled={isLoading}>Sign In</button>
+            <button className="sign-in-button" type="submit" disabled={setLoading}>Sign In</button>
           </form>
         </section>
       </main>

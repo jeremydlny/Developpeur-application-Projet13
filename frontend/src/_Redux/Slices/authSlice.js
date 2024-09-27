@@ -1,3 +1,5 @@
+// authSlice.js
+
 import { createSlice } from "@reduxjs/toolkit";
 import { accountService } from "@/_service/accountService";
 
@@ -14,6 +16,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
+            console.log("Déconnexion en cours...");
             state.isError = null;
             state.isNetworkError = false;
             state.isSuccess = false;
