@@ -1,67 +1,87 @@
-//Login.jsx
-
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToken, setLoading, setError } from '@/_Redux/Slices/authSlice';
-import { accountService } from '@/_service/accountService';
 import { useNavigate } from 'react-router-dom';
-import "@/Style/main.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import { accountService } from "@/_service/accountService";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const [msg, setMsg] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const navigate = useNavigate();
 
-  useEffect( () => {
-    verifyToken();
-  
-}, [navigate]);
+    const initialValues = {
+        email: localStorage.getItem('email') || "", 
+        password: "",
+    };
 
-  const verifyToken = async () => {
-    const response = await accountService.isLogged();
-    console.log(response);
-    if (response) {
-      navigate('/profil');
-    }
-  };
+    useEffect(() => {}, []);
 
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email("Veuillez entrer une adresse email valide").required("Veuillez entrer votre adresse email"),
+        password: Yup.string().required("Veuillez entrer un mot de passe")
+    });
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await accountService.loginUser({ email, password });
+    const onSubmit = async (data) => {
+        try {
+            const response = await accountService.loginUser(data);
+            const token = response.data.body.token;
+            accountService.saveToken(token);
 
-      accountService.saveToken(response.data.body.token);  // Enregistre le token dans le local storage
-      navigate('/profil');  // Redirige vers la page profil après la connexion
-    } catch (err) {
-      dispatch(setError('Invalid credentials'));  // Gère l'erreur en cas d'échec
-    } 
-};
-  
+            if (rememberMe) {
+                localStorage.setItem('email', data.email);
+            } else {
+                localStorage.removeItem('email');
+            }
 
-  return (
-    <div>
-      <main className="main bg-dark">
-        <section className="sign-in-content">
-          <i className="fa fa-user-circle sign-in-icon"></i>
-          <h1>Sign In</h1>
-          <form onSubmit={handleLogin}>
-            <div className="input-wrapper">
-              <label htmlFor="username">Username</label>
-              <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
+            navigate("/profil", { replace: true });
+        } catch (error) {
+                setMsg("Une erreur inconnue est survenue.");
+         
+        }
+    };
+
+    const handleRememberMe = (e) => {
+        setRememberMe(e.target.checked);
+    };
+
+    return (
+        <div className="main bg-dark">
+            <div className='padding'>
+                <section className="sign-in-content">
+                    <i className="fa fa-user-circle sign-in-icon"></i>
+                    <h1>Sign In</h1>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                        <Form>
+                            <div className="input-wrapper">
+                                <label htmlFor="email">Username</label>
+                                <Field name="email" type="text" placeholder="Username" autoComplete="off"></Field>
+                                <ErrorMessage name="email" component="p" className='errorMessage' />
+                            </div>
+                            <div className="input-wrapper">
+                                <label htmlFor="password">Password</label>
+                                <Field name="password" type="password" placeholder="******" autoComplete="off"></Field>
+                                <ErrorMessage name="password" component="p" className='errorMessage' />
+                            </div>
+                            <div className="input-remember">
+                                <input 
+                                    type="checkbox" 
+                                    id="remember-me" 
+                                    checked={rememberMe} 
+                                    onChange={handleRememberMe} 
+                                />
+                                <label htmlFor="remember-me">Remember me</label>
+                            </div>
+
+                            <button className="sign-in-button" type='submit'>Sign In</button>
+                        </Form>
+                    </Formik>
+                    {/* Affiche le message d'erreur */}
+                    {msg && <p className="error">{msg}</p>}
+                </section>
             </div>
-            <div className="input-wrapper">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <button className="sign-in-button" type="submit" disabled={setLoading}>Sign In</button>
-          </form>
-        </section>
-      </main>
-    </div>
-  );
+        </div>
+    );
 };
-
 
 export default Login;
