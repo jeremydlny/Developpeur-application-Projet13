@@ -46,7 +46,7 @@ const Login = () => {
     };
 
     return (
-        <div className="main bg-dark">
+        <div className="main">
             <div className='padding'>
                 <section className="sign-in-content">
                     <i className="fa fa-user-circle sign-in-icon"></i>
