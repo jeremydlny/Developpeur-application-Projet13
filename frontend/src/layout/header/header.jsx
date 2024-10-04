@@ -27,7 +27,7 @@ const Header = () => {
             {
                 accountService.isLogged() &&
                 <nav>
-                    <NavLink to="/user" className="main-nav-item">
+                    <NavLink to="/profil" className="main-nav-item">
                         <i className="fa fa-user-circle"></i>
                         {firstName}
                     </NavLink>

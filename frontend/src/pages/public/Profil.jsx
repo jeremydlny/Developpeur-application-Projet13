@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { accountService } from '@/_service/accountService';
 import { userSelector } from '@/_Redux/selector/userSelector';
+import accountsData from '@data/accountsData.json'; // Adjust the path based on where you place your data
 
 const Profil = () => {
   const { token } = accountService.getToken();
@@ -30,7 +31,7 @@ const Profil = () => {
 
   return (
     <div className="main">
-        <div className="info">
+      <div className="info">
         <h1>Welcome back</h1>
         <div className="input-group">
           <input type="text" value={newFirstName} onChange={(e) => setNewFirstName(e.target.value)} />
@@ -42,38 +43,18 @@ const Profil = () => {
         </div>
       </div>
 
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-          <p className="account-amount">$2,082.79</p>
-          <p className="account-amount-description">Available Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
-
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Savings (x67124)</h3>
-          <p className="account-amount">$10,928.42</p>
-          <p className="account-amount-description">Available Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
-
-      <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">Argent Bank Credit Card (x5201)</h3>
-          <p className="account-amount">$184.30</p>
-          <p className="account-amount-description">Current Balance</p>
-        </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
-        </div>
-      </section>
+      {accountsData.map((account) => (
+        <section key={account.id} className="account">
+          <div className="account-content-wrapper">
+            <h3 className="account-title">{account.title}</h3>
+            <p className="account-amount">{account.amount}</p>
+            <p className="account-amount-description">{account.description}</p>
+          </div>
+          <div className="account-content-wrapper cta">
+            <button className="transaction-button">View transactions</button>
+          </div>
+        </section>
+      ))}
     </div>
   );
 };
