@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { accountService } from '@/_service/accountService';
 import { userSelector } from '@/_Redux/selector/userSelector';
-import accountsData from '@data/accountsData.json'; // Adjust the path based on where you place your data
+import accountsData from "@/data/accountsData.json";
 
 const Profil = () => {
   const { token } = accountService.getToken();
