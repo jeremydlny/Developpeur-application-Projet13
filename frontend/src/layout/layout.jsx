@@ -3,7 +3,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from "@/layout/header/header";  
-import Footer from "@/layout/footer/footer";  
+import Footer from "@/layout/footer/footer"; 
 
 
 /**
