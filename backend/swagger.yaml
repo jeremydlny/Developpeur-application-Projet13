@@ -57,14 +57,20 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/profile:
-    post:
+  /user/profile/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: User ID
+        required: true
+        type: string
+    get:
       security:
         - Bearer: []
       tags:
         - User Module
-      summary: User Profile API
-      description: API for fetching a user profile
+      summary: Get User Profile by ID
+      description: API for fetching a user profile by ID
       parameters:
         - in: header
           name: Authorization
@@ -82,12 +88,12 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-    put:
+    patch:
       security:
         - Bearer: []
       tags:
         - User Module
-      summary: User Profile API
+      summary: Update User Profile
       description: API for updating a user profile
       parameters:
         - in: header
@@ -112,17 +118,34 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /transactions:
+  /user/{userId}/account/{accountId}/transactions:
     get:
+      security:
+        - Bearer: []
       tags:
         - Transactions
-      summary: Get all transactions for the user
-      description: Returns a list of transactions for the current month, grouped by account
+      summary: Get all transactions for an account
+      description: Returns a list of transactions for a specific account
       parameters:
+        - in: path
+          name: userId
+          description: User ID
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: Account ID
+          required: true
+          type: string
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
+        - in: query
+          name: month
+          description: Filter transactions by month
+          required: false
           type: string
       produces:
         - application/json
@@ -135,48 +158,24 @@ paths:
           description: No transactions found
         "500":
           description: Internal Server Error
-    post:
-      tags:
-        - Transactions
-      summary: Create a new transaction
-      description: Adds a new transaction for a specific account
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Transaction details
-          required: true
-          schema:
-            $ref: "#/definitions/Transaction"
-      produces:
-        - application/json
-      responses:
-        "201":
-          description: Transaction created successfully
-        "400":
-          description: Invalid input
-        "500":
-          description: Internal Server Error
   /transactions/{transactionId}:
     get:
+      security:
+        - Bearer: []
       tags:
         - Transactions
       summary: Get transaction details
       description: Returns details of a specific transaction
       parameters:
+        - in: path
+          name: transactionId
+          description: Transaction ID
+          required: true
+          type: string
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-          type: string
-        - in: path
-          name: transactionId
-          required: true
-          description: ID of the transaction to fetch
           type: string
       produces:
         - application/json
@@ -184,12 +183,14 @@ paths:
         "200":
           description: Transaction details
           schema:
-            $ref: "#/definitions/Transaction"
+            $ref: "#/definitions/TransactionWithNotesAndCategory"
         "404":
           description: Transaction not found
         "500":
           description: Internal Server Error
-    put:
+    patch:
+      security:
+        - Bearer: []
       tags:
         - Transactions
       summary: Update a transaction
@@ -202,15 +203,15 @@ paths:
           type: string
         - in: path
           name: transactionId
+          description: Transaction ID
           required: true
-          description: ID of the transaction to update
           type: string
         - in: body
           name: body
           description: Updated transaction details
           required: true
           schema:
-            $ref: "#/definitions/Transaction"
+            $ref: "#/definitions/TransactionWithNotesAndCategory"
       produces:
         - application/json
       responses:
@@ -223,6 +224,8 @@ paths:
         "500":
           description: Internal Server Error
     delete:
+      security:
+        - Bearer: []
       tags:
         - Transactions
       summary: Delete a transaction
@@ -235,8 +238,8 @@ paths:
           type: string
         - in: path
           name: transactionId
+          description: Transaction ID
           required: true
-          description: ID of the transaction to delete
           type: string
       produces:
         - application/json
@@ -301,7 +304,7 @@ definitions:
         type: string
       lastName:
         type: string
-  Transaction:
+  TransactionWithNotesAndCategory:
     type: object
     properties:
       id:
@@ -316,6 +319,10 @@ definitions:
         format: float
       description:
         type: string
+      notes:
+        type: string
+      category:
+        type: string
   TransactionsResponse:
     type: object
     properties:
@@ -324,4 +331,4 @@ definitions:
       transactions:
         type: array
         items:
-          $ref: "#/definitions/Transaction"
+          $ref: "#/definitions/TransactionWithNotesAndCategory"
