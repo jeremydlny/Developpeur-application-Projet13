@@ -13,6 +13,7 @@ const Profil = () => {
   const { firstName, lastName } = useSelector(userSelector);
   const [newFirstName, setNewFirstName] = useState(firstName);
   const [newLastName, setNewLastName] = useState(lastName);
+  const [isEditing, setIsEditing] = useState(false); // Pour contrôler l'affichage du formulaire ou du texte
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Profil = () => {
     console.log("Submitting:", { firstName: newFirstName, lastName: newLastName });
 
     dispatch(setUserProfile({ firstName: newFirstName, lastName: newLastName }));
+    setIsEditing(false); // Retour au mode affichage après sauvegarde
 
     // Log pour confirmer la mise à jour dans le store
     console.log("Store updated:", { firstName: newFirstName, lastName: newLastName });
@@ -53,26 +55,35 @@ const Profil = () => {
     <div className="main">
       <div className="info">
         <h1>Welcome back</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              value={newFirstName}
-              onChange={(e) => setNewFirstName(e.target.value)}
-              placeholder="First Name"
-            />
-            <input
-              type="text"
-              value={newLastName}
-              onChange={(e) => setNewLastName(e.target.value)}
-              placeholder="Last Name"
-            />
-          </div>
-          <div className="button-group">
-            <button type="submit" className="edit-button">Save</button>
-            <button type="button" className="edit-button">Cancel</button>
-          </div>
-        </form>
+        {!isEditing ? (
+          // Affichage du texte et du bouton "Edit Name"
+          <>
+            <h2>{firstName} {lastName}!</h2>
+            <button onClick={() => setIsEditing(true)} className="edit-button">Edit Name</button>
+          </>
+        ) : (
+          // Affichage du formulaire de modification
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                value={newFirstName}
+                onChange={(e) => setNewFirstName(e.target.value)}
+                placeholder="First Name"
+              />
+              <input
+                type="text"
+                value={newLastName}
+                onChange={(e) => setNewLastName(e.target.value)}
+                placeholder="Last Name"
+              />
+            </div>
+            <div className="button-group">
+              <button type="submit" className="edit-button">Save</button>
+              <button type="button" className="edit-button" onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
+          </form>
+        )}
       </div>
 
       {/* Affichage des comptes bancaires */}

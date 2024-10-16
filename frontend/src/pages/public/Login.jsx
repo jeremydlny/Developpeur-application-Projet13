@@ -56,12 +56,12 @@ const Login = () => {
                         <Form>
                             <div className="input-wrapper">
                                 <label htmlFor="email">Username</label>
-                                <Field name="email" type="text" placeholder="Username" autoComplete="off"></Field>
+                                <Field name="email" type="text" autoComplete="off"></Field>
                                 <ErrorMessage name="email" component="p" className='errorMessage' />
                             </div>
                             <div className="input-wrapper">
                                 <label htmlFor="password">Password</label>
-                                <Field name="password" type="password" placeholder="******" autoComplete="off"></Field>
+                                <Field name="password" type="password" autoComplete="off"></Field>
                                 <ErrorMessage name="password" component="p" className='errorMessage' />
                             </div>
                             <div className="input-remember">

@@ -1,5 +1,22 @@
 /* Gestion de la page Login */
 
+.main {
+  background-color: #12002b;
+  min-height: 87vh;
+}
+
+.padding {
+  padding: 3rem;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
 .sign-in-button {
     display: block;
     width: 100%;
@@ -13,15 +30,15 @@
   }
   
   .sign-in-content {
+    background-color: #fff;
     box-sizing: border-box;
     width: 300px;
     margin: 0 auto;
-    margin-top: 3rem;
     padding: 2rem;
   }
   
   .sign-in-content h1 {
-    color: #00bc77
+    color: black;
   }
   
   .sign-in-icon {
@@ -29,18 +46,8 @@
   }
   
   .input-wrapper input {
-    background-color: #f0f0f0;
-    /* Même fond que sur la page profil */
-    border: 1px solid #ccc;
-    /* Bordure grise claire */
-    border-radius: 5px;
-    /* Coins arrondis */
-    padding: 10px;
-    font-size: 1rem;
-    color: #666666;
-    /* Couleur du texte grise claire */
-    margin-right: 10px;
-    /* Espacement autour */
+    padding: 5px;
+    font-size: 1.2rem;
   }
   
   .input-wrapper input:focus {
@@ -74,41 +81,9 @@
     padding: 5px;
     font-size: 1.2rem;
   }
-  
-  /* Style de la checkbox avec la couleur #00bc77 */
-  input[type="checkbox"] {
-    accent-color: #00bc77;
-    /* Pour appliquer la couleur verte à la case à cocher */
-  }
-  /* General Checkbox Styles */
-  input[type="checkbox"] {
-    appearance: none; /* Remove default checkbox styles */
-    width: 24px;
-    height: 24px;
-    border: 2px solid #00bc77; /* Checkbox border color */
-    border-radius: 4px;
-    background-color: #fff; /* Checkbox background */
-    position: relative;
-    cursor: pointer;
-  }
-  
-  /* Styles for Checked State */
-  input[type="checkbox"]:checked {
-    background-color: #00bc77;
-    border-color: #00bc77;
-  }
-  
-  /* Checkmark styling */
-  input[type="checkbox"]:checked::before {
-    content: '✔';
-    color: white;
-    font-size: 16px;
-    display: block;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
+  .errorMessage {
+    color: red;
+  } 
   
   /* Fin gestion de la page Login */

@@ -12,18 +12,25 @@
     color: #2c3e50;
   }
   
-  .main-nav a.router-link-exact-active {
+  /* .main-nav a.router-link-exact-active {
     color: #42b983;
+  } */
+
+  .fa {
+      display: inline-block;
+      font: normal normal normal 14px / 1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
   }
+
   
   .main-nav-item .fa-user-circle {
-    color: #E0E6ED;
-    font-size: 1.5rem;
+    color: black;
     margin-right: 0.5rem;
   }
   
   .main-nav-item .fa-sign-out {
-    font-size: 1.5rem;
     margin-right: 0.5rem;
   }
   
@@ -32,9 +39,9 @@
     color: #333;
   }
   
-  .main-nav-item .fa-user-circle:hover {
+  /* .main-nav-item .fa-user-circle:hover {
     color: #007b50;
-  }
+  } */
   
   .main-nav-item {
     text-decoration: none;
