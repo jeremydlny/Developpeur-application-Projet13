@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import { accountService } from "@/_service/accountService";
 import { useDispatch, useSelector } from 'react-redux';
-import '@/Style/layout/header.css';
+import '@/styles/layout/header.css';
 
 import Logo from '@/assets/argentBankLogo.png';
 import { userSelector } from '@/_Redux/selector/userSelector.js';

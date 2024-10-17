@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './_Redux/store'; // Le store configuré
 import App from './App';
-import './Style/main.css';
+import '@/styles/main.css';
 
 const root = createRoot(document.getElementById('root'));
 

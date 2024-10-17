@@ -6,7 +6,7 @@ import { userSelector } from '@/_Redux/selector/userSelector';
 import { setUserProfile } from '@/_Redux/Slices/userSlice';
 import accountsData from '@/data/accountsData.json';
 
-import '@/Style/pages/profil.css';
+import '@/styles/pages/profil.css';
 
 const Profil = () => {
   const { token } = accountService.getToken();

@@ -1,7 +1,7 @@
 //Home.jsx
 
 import React from 'react';
-import '@/Style/pages/home.css';
+import '@/styles/pages/home.css';
 
 // Import des images depuis le dossier assets
 import iconChat from '@/assets/icon-chat.png';
