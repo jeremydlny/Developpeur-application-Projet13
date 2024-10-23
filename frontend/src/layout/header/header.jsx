@@ -25,28 +25,25 @@ const Header = () => {
                 <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
-            {
-                accountService.isLogged() &&
-                <nav>
-                    <NavLink to="/profil" className="main-nav-item">
-                        <i className="fa fa-user-circle"></i>
-                        {firstName}
-                    </NavLink>
-                    <NavLink to="/" onClick={logout} className="main-nav-item">
-                        <i className="fa fa-sign-out" />
-                        Sign Out
-                    </NavLink>
-                </nav>
-            }
-            {
-                !accountService.isLogged() &&
-                <nav>
-                    <NavLink to="/login" className="main-nav-item">
-                        <i className="fa fa-user-circle" />
-                        Sign In
-                    </NavLink>
-                </nav>
-            }
+            <nav>
+            {accountService.isLogged() && firstName ? (
+                <>
+                <NavLink to="/profil" className="main-nav-item">
+                    <i className="fa fa-user-circle"></i>
+                    {firstName}
+                </NavLink>
+                <NavLink to="/" onClick={logout} className="main-nav-item">
+                    <i className="fa fa-sign-out" />
+                    Sign Out
+                </NavLink>
+                </>
+            ) : (
+                <NavLink to="/login" className="main-nav-item">
+                <i className="fa fa-user-circle" />
+                Sign In
+                </NavLink>
+            )}
+        </nav>
 
         </header >
     );
